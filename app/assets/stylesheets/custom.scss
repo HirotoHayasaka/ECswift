@@ -1,0 +1,157 @@
+body {
+  margin:0;
+}
+.container {
+  width: 68%;
+  padding-left: 16%;
+  padding-right: 16%;
+  padding-top: 100px;
+}
+.globNav-row{
+ display: table;
+ width: 68%;
+ background-color: #a9a9a9;
+ position: fixed;
+ padding-left: 16%;
+ padding-right: 16%;
+
+   ul{
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+
+      li{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px 0 10px 0;
+        color: white;
+        transition-timing-function:ease-out;
+        transition-duration: 1s;
+        width: 100px;
+        border-left: 1px solid #fff;
+        border-right: 1px solid #fff;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      a{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px 0 10px 0;
+        color: white;
+        transition-timing-function:ease-out;
+        transition-duration: 1s;
+        width: 100px;
+        border-left: 1px solid #fff;
+        border-right: 1px solid #fff;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+}
+.globNav-row > ul>a:hover{
+  background-color:#fff;
+  color: #000;
+}
+
+
+.main-contents{
+  padding-top: 70px;
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #e0ffff;
+}
+
+
+
+.logo{
+  height:50px;
+}
+
+
+.text-center {
+  text-align: center;
+}
+
+.btn-white {
+  color: #000;
+  border: 1px solid #000;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 20px;
+  background-color: rgba(0,0,0,0.0);
+
+  &:hover {
+    color: #000;
+  }
+}
+
+.sessions-new-container{
+  text-align: center;
+  -ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+  top: 50%;
+  width: 100%;
+  display: table;
+  margin: 0 auto 0 auto;
+  background: #fff;
+  border-radius: 4px;
+
+
+
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+
+}
+
+.legend{
+  display: block;
+  background: #000;
+  padding: 15px;
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 0;
+  &:after{
+    content: "";
+    background-repeat: no-repeat;
+    opacity: 0.06;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+fieldset{
+  margin-top: 0;
+}
+
+.form-control {
+  height: 30px;
+  width: 60%;
+}
+.form-group {
+      margin-bottom: 20px;
+    }
+
+.kanri{
+  th  {
+    background-color: #000;
+    color: #fff;
+  }
+}
+td{
+  border: 2px solid #000;
+}
+
+.mypage{
+  padding-top: 100px;
+  margin-left: 50px;;
+}

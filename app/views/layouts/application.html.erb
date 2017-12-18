@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ECswift</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="">
+    <header >
+        <nav class="globNav-row col-md-offset-4 col-md-4">
+          <ul>
+            <li><%= image_tag 'ecswift_logo.png',:class => "logo" %></li>
+            <%= link_to "HOME", root_path %>
+            <a>SHOPLIST</a>
+            <a>SEARCH</a>
+            <a>FAVORITE</a>
+            <% if current_user %>
+              <%= link_to edit_user_path(current_user.id) do %>
+                MY PAGE
+              <% end %>
+              <%= link_to :logout, method: :post do %>
+                LOGOUT
+              <% end %>
+            <% else %>
+              <%= link_to new_user_path do %>
+                REGISTER
+              <% end %>
+              <%= link_to :login do %>
+                LOGIN
+              <% end %>
+            <% end %>
+          </ul>
+        </nav>
+    </header>
+    <div>
+     <p id="notice"><%= flash[:notice] %></p>
+     <p id="alert"><%= flash[:alert] %></p>
+   </div>
+    <%= yield %>
+  </body>
+</html>

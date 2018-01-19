@@ -1,2 +1,38 @@
-<h1>Wears#index</h1>
-<p>Find me in app/views/wears/index.html.erb</p>
+<% if current_user.admin? %>
+  <p id="notice"><%= notice %></p>
+  <div class="left-menu">
+    <%= link_to "ユーザー登録画面", users_path %>
+    <br>
+    <br>
+    <br>
+    <%= link_to "アイテム追加", wears_new_path %>
+    <br>
+    <br>
+    <br>
+    <%= link_to "アイテム一覧", wears_index_path %>
+  </div>
+  	<div class="container">
+   <%= search_form_for @q, :url => {:controller=>"wears",:action => :index} do |f| %>
+        <%= f.label "アイテム検索" %>
+        <%= f.search_field :item_name_or_keywords_or_brand_cont %>
+        <%= f.submit %>
+   <% end %>
+   <% @items.each do |wear| %>
+              <div class="unit unit-admin">
+	                <h2 class="item">
+	                  <%= wear.item_name %>
+	                </h2>
+	                  <%= image_tag wear.image.url %>
+	                <div class="item-info">
+	                  <p>価格：¥<%= wear.price %></p>
+	                  <%= link_to wear.link do %>
+	                  	購入ページへ
+	                  <% end %>
+	                  <p>キーワード：<%= wear.keywords %></p>
+	                  <p>ブランド：<%= wear.brand %></p>
+	                </div>
+              </div>
+        <% end %>
+    </div>
+  </div>
+<% end %>

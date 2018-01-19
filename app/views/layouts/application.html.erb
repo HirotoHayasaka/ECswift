@@ -14,9 +14,8 @@
           <ul>
             <li><%= image_tag 'ecswift_logo.png',:class => "logo" %></li>
             <%= link_to "HOME", root_path %>
-            <a>SHOPLIST</a>
-            <a>SEARCH</a>
-            <a>FAVORITE</a>
+            <%= link_to "SEARCH", wears_search_path %>
+            <%= link_to "FAVORITE", favorites_index_path %>
             <% if current_user %>
               <%= link_to edit_user_path(current_user.id) do %>
                 MY PAGE
@@ -32,7 +31,16 @@
                 LOGIN
               <% end %>
             <% end %>
+            <li>
+              <div class="form-group">
+            <%= search_form_for @q, :url => {:controller=>"wears",:action => :search} do |f| %>
+              <%= f.search_field :item_name_or_keywords_or_brand_cont , class: 'search_form' %>
+              <%= f.submit class: 'search_buttom' %>
+            <% end %>
+            </div>
+          </li>
           </ul>
+
         </nav>
     </header>
     <div>

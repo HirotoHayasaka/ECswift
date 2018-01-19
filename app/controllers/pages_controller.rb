@@ -1,10 +1,16 @@
 class PagesController < ApplicationController
-  if params[:q] != nil
-     params[:q]['title_cont_any'] = params[:q]['title_cont_any'].split(/[\p{blank}\s]+/)
-     @keyword = Page.ransack(params[:q])
-     @blogs = @keyword.result
-  else
-     @keyword = Page.ransack(params[:q])
-     @items = @keyword.result #検索の結果を受け取る。
-   end
+  def index
+  	@wears = Wear.all
+  	@q = Wear.ransack(params[:q])
+  end
+  
+  def search
+    @q = Wear.ransack(params[:q])
+    redirect_to wear_search_path
+  end
+
+  private
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation , :role , :name)
+    end
 end

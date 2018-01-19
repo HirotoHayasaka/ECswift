@@ -59,3 +59,5 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 gem 'sorcery'
+gem 'pry'
+gem "carrierwave"

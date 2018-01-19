@@ -1,0 +1,36 @@
+<div class="container">
+	 <div class="row">
+    <div class="form-group">
+      <%= search_form_for @q, :url => {:action => :search} do |f| %>
+        <%= f.search_field :item_name_or_keywords_or_brand_cont %>
+        <%= f.submit %>
+      <% end %>
+  	</div>
+  	<div class="row">
+        <% @items.each do |wear| %>
+              
+                <div class="unit view view-ninth">
+                  <figure>
+                    <%= image_tag wear.image.url %>
+                    <figcaption>
+                      <div class="caption-text">
+                      <%= link_to wear.link do %>
+                       <p>Click to Datail</p>
+                      <% end %>
+                       <p>Price:¥<%= wear.price%></p>
+                      </div>
+                      <% if !wear.favorite_users.include?(current_user) %>
+                    	<%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+	                      <div class="caption-text">
+	                        Favorite!
+	                      </div>
+                    <% end %>
+                    </figcaption>
+                  </figure>
+                <% end %>
+              </div>
+              
+        <% end %>
+    </div>
+	</div>
+</div>

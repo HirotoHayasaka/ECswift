@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @q = Wear.ransack(params[:q])
   end
 
   # GET /users/1
@@ -12,15 +13,24 @@ class UsersController < ApplicationController
   def show
   end
 
+  def addwear
+  end
+
   # GET /users/new
   def new
-    @user = User.new
+    @user = User.new(role: :user)
+    @q = Wear.ransack(params[:q])
   end
 
   # GET /users/1/edit
   def edit
+    @wears = Wear.all
+    @q = Wear.ransack(params[:q])
   end
 
+  def role 
+    @role = User.role
+  end
   # POST /users
   # POST /users.json
   def create
@@ -65,6 +75,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      current_user = @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

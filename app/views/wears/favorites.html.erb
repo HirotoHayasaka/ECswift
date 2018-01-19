@@ -1,0 +1,28 @@
+<div class="topic-index-wrapper">
+  <div class="container">
+      <div class="row">
+        <% @favorite_wears.each do |wear| %>
+              
+                <div class="unit view view-ninth">
+                  <figure>
+                    <%= image_tag wear.image.url %>
+                    <figcaption>
+                      <%= link_to wear.link do %>
+                      <div class="caption-text">
+                       <p>Click to Datail</p>
+                       <p>¥<%= wear.price%></p>
+                      </div>
+                    <% end %>
+                    <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+                      <div class="caption-text">
+                        Favorite!
+                      </div>
+                    <% end %>
+                    </figcaption>
+                  </figure>
+              </div>
+              
+        <% end %>
+      </div>
+  </div>
+</div>

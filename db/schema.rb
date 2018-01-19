@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214113419) do
+ActiveRecord::Schema.define(version: 20180118075041) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "wear_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
@@ -26,16 +33,7 @@ ActiveRecord::Schema.define(version: 20171214113419) do
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
   end
 
-  create_table "wears", force: :cascade do |t|
-    t.string "item_name"
-    t.string "size"
-    t.integer "price"
-    t.string "link"
-    t.string "keywords"
-    t.string "brand"
-    t.integer "sales_percentage"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Could not dump table "wears" because of following StandardError
+#   Unknown type 'image' for column 'image'
 
 end

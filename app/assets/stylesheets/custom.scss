@@ -1,16 +1,21 @@
 body {
   margin:0;
 }
+.row{
+  float:left;
+}
 .container {
-  width: 68%;
-  padding-left: 16%;
+  z-index: 1;
+  width: 72%;
+  padding-left: 205px;
   padding-right: 16%;
   padding-top: 100px;
 }
 .globNav-row{
+ z-index: 2;
  display: table;
  width: 68%;
- background-color: #a9a9a9;
+ background-color: #000;
  position: fixed;
  padding-left: 16%;
  padding-right: 16%;
@@ -20,6 +25,10 @@ body {
         padding-bottom: 0;
         margin-top: 0;
         margin-bottom: 0;
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: 90px;
+        padding-right: auto;
 
       li{
         display: table-cell;
@@ -51,6 +60,9 @@ body {
         padding-top: 0;
         padding-bottom: 0;
       }
+    }
+    ul:last-child{
+
     }
 }
 .globNav-row > ul>a:hover{
@@ -153,5 +165,211 @@ td{
 
 .mypage{
   padding-top: 100px;
-  margin-left: 50px;;
+  margin-left: 25px;;
+  padding-right: 0;
+  width:200px;
+  margin-right:0;
+  displaystyle: block;
+  float:left;
+}
+
+#mypage {
+  float:left;
+  margin:0;
+  width:600px;
+  padding:0;
+  padding-top: 100px;
+}
+
+
+.slider-wrapper {
+  width: 750px;
+  padding: 5px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #CCC;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slider {
+  width: 30000px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slider > * {
+  -webkit-transform: translateZ(0px);
+}
+
+.slider-wrapper::-webkit-scrollbar {
+  display: none;
+  height: 0 !important;
+}
+
+.unit {
+  float: left;
+  width: 200px;
+  height: 250px;
+  margin: 0 0 5px 5px;
+  border: 1px solid #DDDDDD;
+  background: #EFEFEF;
+  position:relative;
+}
+.unit:nth-child(6){
+ 
+}
+
+.unit img {
+  text-align: center;
+   width: 100%;
+  height: 100%;
+}
+unit:after {
+    clear: both;
+   content: " ";
+   display: block;
+  }
+
+.item-info{
+  background-color: #efefef;
+  margin-top: 0;
+}
+.item-info {
+      display: none;
+      width: 300px;
+      position: absolute;
+      top: 200px;
+      left:0;
+      padding: 16px;
+      border-radius: 5px;
+      background: #33cc99;
+      color: #fff;
+      font-weight: bold;
+      z-index:2;
+    }
+    .item-info:after {
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 0;
+      top: 0;
+      margin-left: 10px;
+      border: solid transparent;
+      border-color: rgba(51, 204, 153, 0);
+      border-top-color: #33cc99;
+      border-width: 10px;
+      pointer-events: none;
+      content: " ";
+    }
+    .unit-admin:hover .item-info {
+      display: block;
+    }
+
+.left-menu {
+  margin-top:100px;
+  float:left;
+  a{
+  padding: 20px;
+  margin-top: 50px;
+  }
+  br{
+   font-size: 100px;
+  }
+}
+
+.items-container {
+  padding-top: 70px;
+}
+
+
+.shoplist {
+  list-style: none;
+  text-align: center;
+  a {
+    float: left;
+    width: 30px;
+    height: 25px;
+    backgroundcolor: black;
+    text-decoration: none;
+    border:  solid 1px black;
+  }
+  a:hover {
+
+  }
+}
+.shoplist:after {
+    clear: both;
+   content: " ";
+   display: block;
+  }
+
+figure {
+  margin:0;
+  padding:0;
+  color: white;
+  width: 200px;
+  height: 250px;
+  text-decoration:none;
+  figcaption {
+    text-decoration:none;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 200px;
+    height: 250px;;
+    background: rgba(0,0,0,0.93);
+    -webkit-transform: rotate(90deg) scale(0);
+    transform: rotate(90deg) scale(0);
+    -webkit-transition: .3s;
+    transition: .3s;
+    opacity: 1;
+    a{
+      text-docoration: none;
+    }
+  }
+}
+figure:hover figcaption {
+  -webkit-transform: rotate(360deg) scale(1);
+  transform: rotate(360deg) scale(1);
+  opacity: 1;
+}
+
+.caption-text{
+  padding: 20px 0px;
+  padding-left:30px;
+  text-decoration: none;
+  color: white;
+  p{
+    text-decoration: none;
+  }
+  p:hover {
+    text-decoration: none;
+  }
+  p:nth-child(1){
+      font-family: curier;
+      font-size: 20px;
+    }
+  
+}
+
+.search_form {
+ float:left;
+ margin-top: 4px;
+ margin-bottom:4px;
+}
+.search_button{
+  float:left;
+  margin-bottom:0;
+}
+
+.unit-admin{
+  img{
+    margin-left: 60px;
+    width: 80px;
+    height: 110px;
+  }
+  margin-bottom:5px;
+  height:200px;
 }

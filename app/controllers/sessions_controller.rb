@@ -14,6 +14,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to(:users, notice: 'ログアウトしました')
+    redirect_to( pages_index_path, notice: 'ログアウトしました')
   end
 end

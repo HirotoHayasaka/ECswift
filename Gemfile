@@ -61,3 +61,4 @@ gem 'jquery-ui-rails'
 gem 'sorcery'
 gem 'pry'
 gem "carrierwave"
+gem 'data-confirm-modal'

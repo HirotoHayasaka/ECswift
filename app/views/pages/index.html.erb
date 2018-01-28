@@ -1,95 +1,116 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+// ページの読み込みが完了してから実行
+$(function() {
+// スクロール途中から表示したいメニューバーを指定
+var navBox = $(".globNav-row");
+
+// 表示を開始するスクロール量を設定(px)
+var TargetPos = 50;
+
+// スクロールされた際に実行
+$(window).scroll( function() {
+// 現在のスクロール位置を取得
+var ScrollPos = $(window).scrollTop();
+// 現在のスクロール位置と、目的のスクロール位置を比較
+if( ScrollPos > TargetPos ){
+// 非表示(フェイドアウト)
+navBox.fadeOut();
+}
+else {
+// 非表示(フェイドアウト)
+navBox.fadeIn();
+}
+});
+});
+</script>
 <div class="container">
+  <h1>人気アイテム</h1>
   <div class="row">
-    <h1>おすすめ</h1>
-        <% @wears.each do |wear| %>
-              
+        <% @wears.each do |wear|  %>
                 <div class="unit view view-ninth">
                   <figure>
                     <%= image_tag wear.image.url %>
                     <figcaption>
-                      <%= link_to wear.link do %>
-                      <div class="caption-text">
-                       <p>Click to Datail</p>
+                      <%= link_to wears_link_path(id: wear.id), target: "_brank" do %>
+                      <% if !wear.favorite_users.include?(current_user) %>
+                      <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+                        <div class="caption-text">
+                          <p class="clickable">Favorite!</p>
+                        </div>
                       <% end %>
-                       <p>¥<%= wear.price%></p>
-                      </div>
-                    <% if !wear.favorite_users.include?(current_user) %>
-                    <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+                      <% end %>
                       <div class="caption-text">
-                        Favorite!
+                       <p class="clickable">Click to Datail</p>
+                      <% end %>
+                       <p>Price:¥<%= wear.price%></p>
+                       <p class="red">Sales from the price:<%= wear.sales_percentage %>%</p>
+                       <p>Colors:<%= wear.colors%></p>
+                       <p>Brand:<%= wear.brand%></p>
                       </div>
-                    <% end %>
-                    <% end %>
                     </figcaption>
                   </figure>
               </div>
-              
+
         <% end %>
   </div>
+  <h1>新着アイテム</h1>
   <div class="row">
-    <h1>最近クリックされたアイテム</h1>
-    
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-      </div><!-- /.slider -->
-    </div><!-- /.slider-wrapper -->
+      <%  @news.each do |wear|  %>
+
+                <div class="unit view view-ninth">
+                  <figure>
+                    <%= image_tag wear.image.url %>
+                    <figcaption>
+                      <% if !wear.favorite_users.include?(current_user) %>
+                      <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+                        <div class="caption-text">
+                          <p class="clickable">Favorite!</p>
+                        </div>
+                      <% end %>
+                      <% end %>
+                      <%= link_to wears_link_path(id: wear.id, wear_id: wear.id),target: "_brank" do %>
+                      <div class="caption-text">
+                       <p class="clickable">Click to Datail</p>
+                      <% end %>
+                      <p>Price:¥<%= wear.price%></p>
+                      <p class="red">Sales from the price:<%= wear.sales_percentage %>%</p>
+                      <p>Colors:<%= wear.colors%></p>
+                      <p>Brand:<%= wear.brand%></p>
+                      </div>
+                    </figcaption>
+                  </figure>
+              </div>
+        <% end %>
   </div>
+  <h1>最近クリックされたアイテム</h1>
+  <div class="row">
+      <% @recents.each do |wear|  %>
+                <div class="unit view view-ninth">
+                  <figure>
+                    <%= image_tag wear.image.url %>
+                    <figcaption>
+                      <% if !wear.favorite_users.include?(current_user) %>
+                      <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+                        <div class="caption-text">
+                          <p class="clickable">Favorite!</p>
+                        </div>
+                      <% end %>
+                      <% end %>
+                      <%= link_to wears_link_path(id: wear.id), target: "_brank" do %>
+                      <div class="caption-text">
+                       <p class="clickable">Click to Datail</p>
+                      <% end %>
+                      <p>Price:¥<%= wear.price%></p>
+                      <p class="red">Sales from the price:<%= wear.sales_percentage %>%</p>
+                      <p>Colors:<%= wear.colors%></p>
+                      <p>Brand:<%= wear.brand%></p>
+
+                    </div>
+                    </figcaption>
+                  </figure>
+              </div>
+        <% end %>
+  </div>
+
 </div>

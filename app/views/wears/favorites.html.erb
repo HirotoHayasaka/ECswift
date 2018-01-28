@@ -1,28 +1,32 @@
 <div class="topic-index-wrapper">
   <div class="container">
       <div class="row">
-        <% @favorite_wears.each do |wear| %>
-              
-                <div class="unit view view-ninth">
-                  <figure>
-                    <%= image_tag wear.image.url %>
-                    <figcaption>
-                      <%= link_to wear.link do %>
-                      <div class="caption-text">
-                       <p>Click to Datail</p>
-                       <p>¥<%= wear.price%></p>
-                      </div>
-                    <% end %>
-                    <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
-                      <div class="caption-text">
-                        Favorite!
-                      </div>
-                    <% end %>
-                    </figcaption>
-                  </figure>
-              </div>
-              
-        <% end %>
+        <%  @favorite_wears.each do |wear|  %>
+
+                  <div class="unit view view-ninth">
+                    <figure>
+                      <%= image_tag wear.image.url %>
+                      <figcaption>
+                        <% if !wear.favorite_users.include?(current_user) %>
+                        <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+                          <div class="caption-text">
+                            <p class="clickable">Favorite!</p>
+                          </div>
+                        <% end %>
+                        <% end %>
+                        <%= link_to wears_link_path(id: wear.id, wear_id: wear.id),target: "_brank" do %>
+                        <div class="caption-text">
+                         <p class="clickable">Click to Datail</p>
+                        <% end %>
+                        <p>Price:¥<%= wear.price%></p>
+                        <p class="red">Sales from the price:<%= wear.sales_percentage %>%</p>
+                        <p>Colors:<%= wear.colors%></p>
+                        <p>Brand:<%= wear.brand%></p>
+                        </div>
+                      </figcaption>
+                    </figure>
+                </div>
+          <% end %>
       </div>
   </div>
 </div>

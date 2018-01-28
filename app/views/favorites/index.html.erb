@@ -2,22 +2,28 @@
   <div class="container">
     <h1>お気に入り</h1>
     <div class="row">
-     <% @favorite_wears.each do |wear| %>
+      <%  @favorite_wears.each do |wear|  %>
+
                 <div class="unit view view-ninth">
                   <figure>
                     <%= image_tag wear.image.url %>
                     <figcaption>
-                      <%= link_to wear.link do %>
+                      <% if wear.favorite_users.include?(current_user) %>
+                      <%= link_to  favorites_destroy_path(wear_id: wear.id) do%>
+                        <div class="caption-text">
+                          <p class="clickable">cansel favorite</p>
+                        </div>
+                      <% end %>
+                      <% end %>
+                      <%= link_to wears_link_path(id: wear.id, wear_id: wear.id),target: "_brank" do %>
                       <div class="caption-text">
-                       <p>Click to Datail</p>
-                       <p>¥<%= wear.price%></p>
+                       <p class="clickable">Click to Datail</p>
+                      <% end %>
+                      <p>Price:¥<%= wear.price%></p>
+                      <p class="red">Sales from the price:<%= wear.sales_percentage %>%</p>
+                      <p>Colors:<%= wear.colors%></p>
+                      <p>Brand:<%= wear.brand%></p>
                       </div>
-                    <% end %>
-                    <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
-                      <div class="caption-text">
-                        Favorite!
-                      </div>
-                    <% end %>
                     </figcaption>
                   </figure>
               </div>

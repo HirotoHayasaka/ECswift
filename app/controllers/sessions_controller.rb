@@ -1,9 +1,11 @@
 class SessionsController < ApplicationController
   def new
+    @q = Wear.ransack(params[:q])
     @user = User.new
   end
 
   def create
+    @q = Wear.ransack(params[:q])
     if @user = login(params[:email], params[:password], params[:remember])
       redirect_back_or_to(:users, notice: 'ログインに成功しました')
     else

@@ -1,5 +1,7 @@
 {
   "name": "ECswift",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "pretty-checkbox": "^3.0.3"
+  }
 }

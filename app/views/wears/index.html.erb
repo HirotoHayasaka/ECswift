@@ -11,25 +11,74 @@
     <br>
     <%= link_to "アイテム一覧", wears_index_path %>
   </div>
-  	<div class="container">
-   <%= search_form_for @q, :url => {:controller=>"wears",:action => :index} do |f| %>
-        <%= f.label "アイテム検索" %>
-        <%= f.search_field :item_name_or_keywords_or_brand_cont %>
-        <%= f.submit %>
-   <% end %>
+  	<div class="container container-admin">
+      <div class="form-group search">
+        <%= search_form_for @q, :url => {:action => :search, class: 'search_form'} do |f| %>
+  				<div class="biggroup">
+  					<div class="group">
+  						<p class="bold">Keywords</p><br>
+  		        <%= f.search_field :item_name_or_keywords_or_brand_cont ,placeholder: ' please input keywords of what you want',class: "search-input" %>
+  					</div>
+  							<div class="group gender">
+  	            <p class="bold">Gender</p><br>
+  		            <%= f.check_box :sex_in, { multiple: true }, 1, nil %>
+  		            <%= f.label :sex_in, 'man', value:1 , class: "check" %>
+  		            <%= f.check_box :sex_in, { multiple: true },2, nil %>
+  		            <%= f.label :sex_in, 'weman', value:2 , class: "check" %>
+  		            <%= f.check_box :sex_in, { multiple: true },3, nil %>
+  		            <%= f.label :sex_in, 'unisex', value:3 , class: "check ckeck-last" %>
+  							</div>
+  							<div class="color">
+  								<p class="bold">Color</p><br>
+  								<%= f.select :colors_cont,[["white",'white'],["black", 'black'], ["gray", 'gray'], ["brown", 'brown'], ["beige", 'beige'],["green", 'green'], ["brue", 'brue'], ["purple", 'purple'], ["yellow", 'yellow'],["pink", 'pink'],["red", 'red'],["orange", 'orange'],["other", 'other']],include_blank: true %>
+  							</div>
+  				</div>
+  				<br>
+  				<div class="biggroup">
+  					<div class="sort">
+  					<p class="bold">Sort</p><br>
+  							<%= sort_link(@q,:popularity, 'popularity') %>
+  							<%= sort_link(@q,:created_at, 'new') %>
+  							<%= sort_link(@q,:price, 'price') %>
+  							<%= sort_link(@q,:sales_percentage, 'sales') %>
+  					</div>
+  					<div class="category">
+  						<p class="bold">Category</p><br>
+  						<%= f.select :category_cont,[["tops", 1], ["outer", 2], ["pants", 3], ["all in one", 4],["skirt", 5], ["dress", 6], ["bag", 7], ["shoes", 8],["accessories", 9]],include_blank: true %>
+  					</div>
+  					<div class="brand">
+  						<p class="bold">Brand</p><br>
+  						<%= f.select :brand_eq,Wear.pluck(:brand).uniq, include_blank: true %>
+  					</div>
+          <%= f.submit 'Go!',class: 'btn' %>
+        <% end %>
+  		</div>
    <% @items.each do |wear| %>
               <div class="unit unit-admin">
 	                <h2 class="item">
 	                  <%= wear.item_name %>
+	                  <div class="batu">
+	                  <%= link_to wears_destroy_path(wear), method: :delete, data: {confirm: 'Are you sure?'} do %>
+	                  	<%= image_tag 'batu.png' %>
+	                  <% end %>
+	              	  </div>
 	                </h2>
+                  <% if wear.image.url != nil %>
 	                  <%= image_tag wear.image.url %>
+                  <% end %>
 	                <div class="item-info">
 	                  <p>価格：¥<%= wear.price %></p>
-	                  <%= link_to wear.link do %>
+	                  <%= link_to wear.link, target: '_brank' do %>
 	                  	購入ページへ
 	                  <% end %>
+                    <p>カラバリ：<%= wear.colors %></p>
+                    <p>ジェンダー：<%= wear.sex %></p>
+                    <p>カテゴリ：<%= wear.category %></p>
+                    <p>セール：<%= wear.sales_percentage %></p>
 	                  <p>キーワード：<%= wear.keywords %></p>
 	                  <p>ブランド：<%= wear.brand %></p>
+	                  <p>追加日時:<%= wear.created_at %></p>
+                    <%= link_to '編集する',edit_wear_path(id: wear.id)%>
 	                </div>
               </div>
         <% end %>

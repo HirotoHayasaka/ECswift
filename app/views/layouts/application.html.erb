@@ -35,7 +35,7 @@
               <div class="form-group">
             <%= search_form_for @q, :url => {:controller=>"wears",:action => :search} do |f| %>
               <%= f.search_field :item_name_or_keywords_or_brand_cont , class: 'search_form' %>
-              <%= f.submit class: 'search_buttom' %>
+              <%= f.submit class: 'header-btn' %>
             <% end %>
             </div>
           </li>

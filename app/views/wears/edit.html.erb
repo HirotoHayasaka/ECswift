@@ -1,0 +1,64 @@
+<% if current_user.admin? %>
+  <p id="notice"><%= notice %></p>
+  <div class="left-menu">
+    <%= link_to "ユーザー登録画面", users_path %>
+    <br>
+    <br>
+    <br>
+    <%= link_to "アイテム追加", wears_new_path %>
+    <br>
+    <br>
+    <br>
+    <%= link_to "アイテム一覧", wears_path %>
+  </div>
+  <% end %>
+  <div class="container">
+  	<%= form_for @wear, :url => {:action => :update} do |f| %>
+            <div class="form-group">
+              <%= f.label :image %>
+              <%= f.file_field :image %>
+            </div>
+            <div class="form-group">
+              <%= f.label :item_name %>
+              <%= f.text_field :item_name, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :sex %>
+              <%= f.select :sex,[['man', 1],['weman',2],['unisex',3]] %>
+            </div>
+            <div class="form-group">
+              <%= f.label :price %>
+              <%= f.text_field :price, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :sales_percentage %>
+              <%= f.text_field :sales_percentage, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :colors %>
+              <%= f.text_field :colors, class: 'form-control' %>
+            </div>
+            <%= f.label :category %>
+            <%= f.select :category,[["all", nil],["tops",'tops' ], ["outer", 'outer'], ["pants", 'pants'], ["all in one", 'all_in_one'],["skirt", 'skirt'], ["dress", 'dress'], ["bag", '7'], ["shoes", 'shoes'], ["accessories", 'accessory']] %>
+            <div class="form-group">
+              <%= f.label :link %>
+              <%= f.text_field :link, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :keywords %>
+              <%= f.text_field :keywords, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :brand %>
+              <%= f.text_field :brand, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.hidden_field :addedtime, :value => Time.current %>
+            </div>
+
+            <%= f.submit '更新', class: 'btn btn-black btn-block' %>
+
+    <% end %>
+</div>

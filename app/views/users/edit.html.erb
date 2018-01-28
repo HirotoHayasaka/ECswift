@@ -3,8 +3,14 @@
 
     <%= render 'form', user: @user %>
 
-    <%= link_to 'Show', @user %> |
-    <%= link_to 'Back', users_path %>
+    <div class="left-menu">
+  <p id="notice"><%= notice %></p>
+  <p>
+    <strong>Email:</strong>
+    <%= current_user.email %>
+  </p>
+
+</div>
 </div>
   <% if current_user.admin? %>
     <div class="left-menu">
@@ -15,214 +21,40 @@
     <%= link_to "アイテム追加・削除・編集画面", wears_new_path %>
   </div>
   <% end %>
-  <% if current_user.user? %>
-  <div class="container" id="mypage">
-  	<div class="raw">
-	<p id="notice"><%= notice %></p>
-	<p>
-	  <strong>Email:</strong>
-	  <%= current_user.email %>
-	</p>
-
+  <% if !current_user.admin? %>
+  	
+  <div class="container">
+  	<div class="row">
+    <h1>あなたがクリックしたアイテム</h1>
+        <%  count = 0;
+            @wears.each do |wear| 
+                count += 1
+              if count > 10 then
+                break
+              end
+          %>
+                <div class="unit view view-ninth">
+                  <figure>
+                    <%= image_tag wear.image.url %>
+                    <figcaption>
+                      <%= link_to wears_link_path(id: wear.id), target: "_brank" do %>
+                      <div class="caption-text">
+                       <p>Click to Datail</p>
+                      <% end %>
+                       <p>¥<%= wear.price%></p>
+                      </div>
+                    <% if !wear.favorite_users.include?(current_user) %>
+                    <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+                      <div class="caption-text">
+                        Favorite!
+                      </div>
+                    <% end %>
+                    <% end %>
+                    </figcaption>
+                  </figure>
+              </div>
+              
+        <% end %>
+  </div>
 </div>
-  	<div class="raw">
-    <h1>あなたへのおすすめ</h1>
-    <div class="slider-wrapper">
-      <div class="slider">
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-      </div><!-- /.slider -->
-    </div><!-- /.slider-wrapper -->
-  </div>
-  <div class="raw">
-    <h1>最近クリックしたアイテム</h1>
-    <div class="slider-wrapper">
-      <div class="slider">
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-      </div><!-- /.slider -->
-    </div><!-- /.slider-wrapper -->
-    <div class="raw">
-    <h1>あなたの持っているアイテム</h1>
-    <div class="slider-wrapper">
-      <div class="slider">
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-        <div class="unit">
-          <p class="img"><img src="" alt="" /></p>
-          <p class="caption">キャプションです。</p>
-        </div><!-- /.unit -->
-      </div><!-- /.slider -->
-    </div><!-- /.slider-wrapper -->
-  </div>
 <% end %>

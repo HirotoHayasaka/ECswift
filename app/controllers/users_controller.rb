@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+     @q = Wear.ransack(params[:q])
   end
 
   def addwear
@@ -24,7 +25,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @wears = Wear.all
+    @recent = Recentclick.where(user_id: current_user)
+    wears = @recent.select("wear_id")
+    @allwear = Wear.where(id: wears.pluck(:wear_id))
+    @wears = @allwear.order(updated_at: "DESC") 
+
     @q = Wear.ransack(params[:q])
   end
 
@@ -34,6 +39,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    @q = Wear.ransack(params[:q])
     @user = User.new(user_params)
 
     respond_to do |format|

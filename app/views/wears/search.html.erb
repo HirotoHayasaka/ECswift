@@ -1,36 +1,102 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+// ページの読み込みが完了してから実行
+$(function() {
+// スクロール途中から表示したいメニューバーを指定
+var navBox = $(".globNav-row");
+
+// 表示を開始するスクロール量を設定(px)
+var TargetPos = 50;
+
+// スクロールされた際に実行
+$(window).scroll( function() {
+// 現在のスクロール位置を取得
+var ScrollPos = $(window).scrollTop();
+// 現在のスクロール位置と、目的のスクロール位置を比較
+if( ScrollPos > TargetPos ){
+// 非表示(フェイドアウト)
+navBox.fadeOut();
+}
+else {
+// 非表示(フェイドアウト)
+navBox.fadeIn();
+}
+});
+});
+</script>
 <div class="container">
-	 <div class="row">
-    <div class="form-group">
-      <%= search_form_for @q, :url => {:action => :search} do |f| %>
-        <%= f.search_field :item_name_or_keywords_or_brand_cont %>
-        <%= f.submit %>
+	<h1>アイテム検索</h1>
+	 <div class="search-group">
+    <div class="form-group search">
+      <%= search_form_for @q, :url => {:action => :search, class: 'search_form'} do |f| %>
+				<div class="biggroup">
+					<div class="group">
+						<p class="bold">Keywords</p><br>
+		        <%= f.search_field :item_name_or_keywords_or_brand_cont ,placeholder: ' please input keywords of what you want',class: "search-input" %>
+					</div>
+							<div class="group gender">
+	            <p class="bold">Gender</p><br>
+		            <%= f.check_box :sex_in, { multiple: true }, 1, nil %>
+		            <%= f.label :sex_in, 'man', value:1 , class: "check" %>
+		            <%= f.check_box :sex_in, { multiple: true },2, nil %>
+		            <%= f.label :sex_in, 'weman', value:2 , class: "check" %>
+		            <%= f.check_box :sex_in, { multiple: true },3, nil %>
+		            <%= f.label :sex_in, 'unisex', value:3 , class: "check ckeck-last" %>
+							</div>
+							<div class="color">
+								<p class="bold">Color</p><br>
+								<%= f.select :colors_cont,[["white",'white'],["black", 'black'], ["gray", 'gray'],["brown", 'brown'],["camel",'camel'], ["beige", 'beige'],["green",'green'],["khaki",'khaki'], ["blue", 'blue'],["navy",'navy'], ["purple", 'purple'], ["yellow", 'yellow'],["pink", 'pink'],["red",'red'],["bordeaux",'bordeaux'],["orange", 'orange'],["other", 'other']],include_blank: true %>
+							</div>
+				</div>
+				<br>
+				<div class="biggroup">
+					<div class="sort">
+					<p class="bold">Sort</p><br>
+							<%= sort_link(@q,:popularity, 'popularity') %>
+							<%= sort_link(@q,:created_at, 'new') %>
+							<%= sort_link(@q,:price, 'price') %>
+							<%= sort_link(@q,:sales_percentage, 'sales') %>
+					</div>
+					<div class="category">
+						<p class="bold">Category</p><br>
+						<%= f.select :category_cont,[["tops", 1], ["outer", 2], ["pants", 3], ["all in one", 4],["skirt", 5], ["dress", 6], ["bag", 7], ["shoes", 8],["accessories", 9]],include_blank: true %>
+					</div>
+					<div class="brand">
+						<p class="bold">Brand</p><br>
+						<%= f.select :brand_eq,Wear.pluck(:brand).uniq, include_blank: true %>
+					</div>
+        <%= f.submit 'Go!',class: 'btn' %>
       <% end %>
+		</div>
   	</div>
-  	<div class="row">
-        <% @items.each do |wear| %>
-              
-                <div class="unit view view-ninth">
-                  <figure>
-                    <%= image_tag wear.image.url %>
-                    <figcaption>
-                      <div class="caption-text">
-                      <%= link_to wear.link do %>
-                       <p>Click to Datail</p>
-                      <% end %>
-                       <p>Price:¥<%= wear.price%></p>
-                      </div>
-                      <% if !wear.favorite_users.include?(current_user) %>
-                    	<%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
-	                      <div class="caption-text">
-	                        Favorite!
-	                      </div>
-                    <% end %>
-                    </figcaption>
-                  </figure>
-                <% end %>
-              </div>
-              
-        <% end %>
+		<br>
+  	<div class="row search-row">
+			<% @items.each do |wear|  %>
+							<div class="unit view view-ninth">
+								<figure>
+									<%= image_tag wear.image.url %>
+									<figcaption>
+										<%= link_to wears_link_path(id: wear.id), target: "_brank" do %>
+										<% if !wear.favorite_users.include?(current_user) %>
+										<%= link_to  favorites_create_from_search_path(wear_id: wear.id), :url => {:action => :create_from_search } do%>
+											<div class="caption-text">
+												<p class="clickable">Favorite!</p>
+											</div>
+										<% end %>
+										<% end %>
+										<div class="caption-text">
+										 <p class="clickable">Click to Datail</p>
+										<% end %>
+										 <p>Price:¥<%= wear.price%></p>
+										 <p class="red">Sales from the price:<%= wear.sales_percentage %>%</p>
+										 <p>Colors:<%= wear.colors%></p>
+										 <p>Brand:<%= wear.brand%></p>
+										</div>
+									</figcaption>
+								</figure>
+						</div>
+
+			<% end %>
     </div>
 	</div>
 </div>

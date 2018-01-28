@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
   def index
-  	@wears = Wear.all
+  	@wears = Wear.all.order(popularity: "DESC")
   	@q = Wear.ransack(params[:q])
+  	@recents = Wear.all.order(updated_at: "DESC")
+  	@news = Wear.all.order(created_at: "DESC")
   end
   
   def search

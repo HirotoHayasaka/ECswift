@@ -17,6 +17,5 @@
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require flowtype
-
-$('body').flowtype();
+//= require data-confirm-modal
 

@@ -8,5 +8,6 @@ class User < ApplicationRecord
   enum role: {admin: 0, user: 1}
   has_many :favorites
   has_many :favorite_wears, through: :favorites, source: 'wear'
+  has_many :recentclicks
 
 end

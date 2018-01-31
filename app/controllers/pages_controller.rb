@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   	@recents = Wear.all.order(updated_at: "DESC")
   	@news = Wear.all.order(created_at: "DESC")
   end
-  
+
   def search
     @q = Wear.ransack(params[:q])
     redirect_to wear_search_path

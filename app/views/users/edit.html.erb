@@ -1,3 +1,58 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+// ページの読み込みが完了してから実行
+$(function() {
+// スクロール途中から表示したいメニューバーを指定
+var navBox = $(".globNav-row");
+
+// 表示を開始するスクロール量を設定(px)
+var TargetPos = 50;
+
+// スクロールされた際に実行
+$(window).scroll( function() {
+// 現在のスクロール位置を取得
+var ScrollPos = $(window).scrollTop();
+// 現在のスクロール位置と、目的のスクロール位置を比較
+if( ScrollPos > TargetPos ){
+// 非表示(フェイドアウト)
+navBox.fadeOut();
+}
+else {
+// 非表示(フェイドアウト)
+navBox.fadeIn();
+}
+});
+});
+</script>
+<script>
+$(function() {
+var h = $(window).height();
+
+$('#wrap').css('display','none');
+$('.globNav-row').css('display', 'none');
+$('#loader-bg ,#loader').height(h).css('display','block');
+});
+
+$(window).on("load",function () { //全ての読み込みが完了したら実行
+$('#loader-bg').delay(900).fadeOut(800);
+$('#loader').delay(600).fadeOut(300);
+$('.globNav-row').css('display', 'table');
+$('#wrap').css('display', 'block');
+});
+
+//10秒たったら強制的にロード画面を非表示
+$(function(){
+setTimeout('stopload()',400);
+});
+
+function stopload(){
+$('.globNav-row').css('display', 'table');
+$('#wrap').css('display','block');
+$('#loader-bg').delay(900).fadeOut(800);
+$('#loader').delay(600).fadeOut(300);
+}
+</script>
+
 <div class="mypage">
     <h1>登録情報変更</h1>
 
@@ -22,38 +77,36 @@
   </div>
   <% end %>
   <% if !current_user.admin? %>
-  	
+
   <div class="container">
-  	<div class="row">
     <h1>あなたがクリックしたアイテム</h1>
-        <%  count = 0;
-            @wears.each do |wear| 
-                count += 1
-              if count > 10 then
-                break
-              end
-          %>
-                <div class="unit view view-ninth">
-                  <figure>
-                    <%= image_tag wear.image.url %>
-                    <figcaption>
-                      <%= link_to wears_link_path(id: wear.id), target: "_brank" do %>
-                      <div class="caption-text">
-                       <p>Click to Datail</p>
-                      <% end %>
-                       <p>¥<%= wear.price%></p>
-                      </div>
-                    <% if !wear.favorite_users.include?(current_user) %>
-                    <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
-                      <div class="caption-text">
-                        Favorite!
-                      </div>
-                    <% end %>
-                    <% end %>
-                    </figcaption>
-                  </figure>
+    <div class="row">
+        <% @wears.each do |wear| %>
+        <div class="unit view view-ninth">
+          <figure>
+            <%= image_tag wear.image.url %>
+            <figcaption>
+              <% if !wear.favorite_users.include?(current_user) %>
+              <%= link_to  favorites_path(wear_id: wear.id), method: :post do%>
+                <div class="caption-text">
+                  <p class="clickable">Favorite!</p>
+                </div>
+              <% end %>
+              <% end %>
+              <%= link_to wears_link_path(id: wear.id), target: "_brank" do %>
+              <div class="caption-text">
+               <p class="clickable">Click to Datail</p>
+              <% end %>
+               <p>Price:¥<%= wear.price%></p>
+               <p class="red">Sales from the price:<%= wear.sales_percentage %>%</p>
+               <p>Colors:<%= wear.colors%></p>
+               <p>Brand:<%= wear.brand%></p>
               </div>
-              
+            </figcaption>
+          </figure>
+      </div>
+
+
         <% end %>
   </div>
 </div>

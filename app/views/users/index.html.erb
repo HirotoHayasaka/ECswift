@@ -26,9 +26,8 @@
           <td><%= user.email %></td>
           <td><%= user.crypted_password %></td>
           <td><%= user.salt %></td>
-          <td><%= link_to 'Show', user %></td>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+          <td><%= link_to 'マイページ', edit_user_path(user) %></td>
+          <td class="delete"><%= link_to '削除', user, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -39,5 +38,3 @@
   <%= link_to 'New User', new_user_path %>
   </div>
 <% end %>
-
-

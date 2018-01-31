@@ -1,5 +1,13 @@
-body {
+body{
+  margin: 0;
+}
+.back {
   margin:0;
+  background-image: url(background.png);
+  h1{
+    font-weight: bold;
+  }
+  padding-bottom: 300px;
 }
 .row{
   float:left;
@@ -203,25 +211,6 @@ td{
   border: 2px solid #000;
 }
 
-.mypage{
-  color: black;
-  padding-top: 100px;
-  margin-left: 25px;;
-  padding-right: -50px;
-  width:170px;
-  margin-right:0;
-  displaystyle: block;
-  float:left;
-}
-
-#mypage {
-  float:left;
-  margin:0;
-  width:600px;
-  padding:0;
-  padding-top: 100px;
-}
-
 
 .slider-wrapper {
   width: 750px;
@@ -362,7 +351,7 @@ figure {
     left: 0;
     z-index: 2;
     width: 204px;
-    height: 254px;;
+    height: 254px;
     background: rgba(0,0,0,0.93);
     -webkit-transform: rotate(90deg) scale(0);
     transform: rotate(90deg) scale(0);
@@ -372,6 +361,10 @@ figure {
     overflow: scroll;
     a{
       text-docoration: none;
+      cursor:pointer;
+    }
+    p:last-child{
+      margin-bottom: 10px;
     }
   }
 }
@@ -450,7 +443,7 @@ figure:hover figcaption {
     }
  }
 
-input[type=checkbox]{
+.gender input[type=checkbox]{
   display: none;
 }
 .check {
@@ -618,4 +611,154 @@ input[type=checkbox]{
 }
 .search-row{
   height: 775px;
+}
+
+.login{
+  border-radius: 3em;
+  text-align: center;
+  width: 500px;
+  height: 450px;
+  padding-top: 30px;
+  margin: 40px auto 0 auto;
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+  form{
+    label{
+      font-weight: bold;
+      margin-bottom: 10px;
+      background-color: #696969;
+      cursor: pointer;
+      #remember:checked + &{
+        background-color: black;
+        color: white;
+        &:hover{
+          background-color: #696969;
+          color: white;
+        }
+      }
+    }
+    input{
+      height:30px;
+      width:330px;
+    }
+    input[type=checkbox]{
+      display: none;
+    }
+  }
+  .remember{
+    display: none;
+  }
+}
+input[type=checkbox]:checked + .remember{
+  display: block;
+  width: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-btn{
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+#explanation{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-family: HiraKakuPro-W6;
+  font-size: 3em;
+  text-align: center;
+}
+.login-logo{
+  width: 155px;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mypage{
+  color: black;
+  margin-top: 150px;
+  margin-left: 25px;;
+  padding-right: -50px;
+  width:170px;
+  margin-right:0;
+  float:left;
+  border-radius: 3em;
+  text-align: center;
+  height: 450px;
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+
+  h1{
+    font-size: 20px;
+  }
+  form{
+    label{
+      font-weight: bold;
+      margin-bottom: 10px;
+      background-color: #696969;
+      cursor: pointer;
+      #remember:checked + &{
+        background-color: black;
+        color: white;
+        &:hover{
+          background-color: #696969;
+          color: white;
+        }
+      }
+    }
+    input{
+      height:30px;
+      width:100px;
+    }
+    input[type=submit]{
+      width: 100px;
+    }
+  }
+  .remember{
+    display: none;
+  }
+}
+
+#mypage {
+  float:left;
+  margin:0;
+  width:600px;
+  padding:0;
+  padding-top: 100px;
+}
+
+.delete{
+  &:hover{
+    background-color: red;
+  }
+}
+
+#loader-bg {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: #fff;
+  z-index: 5;
+}
+#loader {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  margin-top: -100px;
+  margin-left: -100px;
+  text-align: center;
+  color: #000;
+  z-index: 6;
 }

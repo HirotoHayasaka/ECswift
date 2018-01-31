@@ -1,7 +1,39 @@
-<div class="container">
-  <h1>Login</h1>
+<script>
+$(function() {
+var h = $(window).height();
 
-  <%= render 'form' %>
+$('#wrap').css('display','none');
+$('.globNav-row').css('display', 'none');
+$('#loader-bg ,#loader').height(h).css('display','block');
+});
 
-  <%= link_to 'Back', sessions_path %>
+$(window).on("load",function () { //全ての読み込みが完了したら実行
+$('#loader-bg').delay(900).fadeOut(800);
+$('#loader').delay(600).fadeOut(300);
+$('.globNav-row').css('display', 'table');
+$('#wrap').css('display', 'block');
+});
+
+//10秒たったら強制的にロード画面を非表示
+$(function(){
+setTimeout('stopload()',400);
+});
+
+function stopload(){
+$('.globNav-row').css('display', 'table');
+$('#wrap').css('display','block');
+$('#loader-bg').delay(900).fadeOut(800);
+$('#loader').delay(600).fadeOut(300);
+}
+</script>
+
+<div class="container back">
+  <h1 id="explanation" >ECサイトを横断させ<br><br><br>あなたとアイテムの出会いの可能性を広げる</h1>
+  <div class="login-logo"><%= image_tag 'ecswift_logo.png',:class => "logo" %></div>
+  <div class="login">
+    <h1>Login</h1>
+
+    <%= render 'form' %>
+
+  </div>
 </div>

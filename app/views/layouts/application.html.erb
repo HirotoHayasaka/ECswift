@@ -9,14 +9,21 @@
   </head>
 
   <body class="">
+    <div id="loader-bg">
+  <div id="loader">
+    <%= image_tag 'load.gif' %>
+    <p>Now Loading...</p>
+  </div>
+</div>
+<div id="wrap">
     <header >
         <nav class="globNav-row col-md-offset-4 col-md-4">
           <ul>
             <li><%= image_tag 'ecswift_logo.png',:class => "logo" %></li>
             <%= link_to "HOME", root_path %>
             <%= link_to "SEARCH", wears_search_path %>
-            <%= link_to "FAVORITE", favorites_index_path %>
             <% if current_user %>
+            <%= link_to "FAVORITE", favorites_index_path %>
               <%= link_to edit_user_path(current_user.id) do %>
                 MY PAGE
               <% end %>
@@ -48,5 +55,6 @@
      <p id="alert"><%= flash[:alert] %></p>
    </div>
     <%= yield %>
+  </div>
   </body>
 </html>

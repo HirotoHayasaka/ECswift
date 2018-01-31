@@ -24,6 +24,35 @@ navBox.fadeIn();
 });
 });
 </script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(function() {
+var h = $(window).height();
+
+$('#wrap').css('display','none');
+$('.globNav-row').css('display', 'none');
+$('#loader-bg ,#loader').height(h).css('display','block');
+});
+
+$(window).on("load",function () { //全ての読み込みが完了したら実行
+$('#loader-bg').delay(900).fadeOut(800);
+$('#loader').delay(600).fadeOut(300);
+$('.globNav-row').css('display', 'table');
+$('#wrap').css('display', 'block');
+});
+
+//10秒たったら強制的にロード画面を非表示
+$(function(){
+setTimeout('stopload()',400);
+});
+
+function stopload(){
+$('.globNav-row').css('display', 'table');
+$('#wrap').css('display','block');
+$('#loader-bg').delay(900).fadeOut(800);
+$('#loader').delay(600).fadeOut(300);
+}
+</script>
 <div class="container">
 	<h1>アイテム検索</h1>
 	 <div class="search-group">
@@ -39,7 +68,7 @@ navBox.fadeIn();
 		            <%= f.check_box :sex_in, { multiple: true }, 1, nil %>
 		            <%= f.label :sex_in, 'man', value:1 , class: "check" %>
 		            <%= f.check_box :sex_in, { multiple: true },2, nil %>
-		            <%= f.label :sex_in, 'weman', value:2 , class: "check" %>
+		            <%= f.label :sex_in, 'woman', value:2 , class: "check" %>
 		            <%= f.check_box :sex_in, { multiple: true },3, nil %>
 		            <%= f.label :sex_in, 'unisex', value:3 , class: "check ckeck-last" %>
 							</div>
@@ -76,14 +105,16 @@ navBox.fadeIn();
 								<figure>
 									<%= image_tag wear.image.url %>
 									<figcaption>
-										<%= link_to wears_link_path(id: wear.id), target: "_brank" do %>
 										<% if !wear.favorite_users.include?(current_user) %>
 										<%= link_to  favorites_create_from_search_path(wear_id: wear.id), :url => {:action => :create_from_search } do%>
+										<% if current_user != nil %>
 											<div class="caption-text">
 												<p class="clickable">Favorite!</p>
 											</div>
 										<% end %>
 										<% end %>
+										<% end %>
+										<%= link_to wears_link_path(id: wear.id), target: "_brank" do %>
 										<div class="caption-text">
 										 <p class="clickable">Click to Datail</p>
 										<% end %>
@@ -91,6 +122,7 @@ navBox.fadeIn();
 										 <p class="red">Sales from the price:<%= wear.sales_percentage %>%</p>
 										 <p>Colors:<%= wear.colors%></p>
 										 <p>Brand:<%= wear.brand%></p>
+										 <p>Category:<%= wear.category %></p>
 										</div>
 									</figcaption>
 								</figure>

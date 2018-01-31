@@ -26,8 +26,10 @@ class WearsController < ApplicationController
     @time.updated_at = Time.current
     @time.popularity = @time.popularity.to_i + 1;
     @time.save
-    @click = Recentclick.new(user_id: current_user.id,wear_id: @time.id,updated_at: @time.updated_at)
-    @click.save
+    if current_user != nil
+      @click = Recentclick.new(user_id: current_user.id,wear_id: @time.id,updated_at: @time.updated_at)
+      @click.save
+    end
     redirect_to @time.link ,target: "_blank"
   end
 

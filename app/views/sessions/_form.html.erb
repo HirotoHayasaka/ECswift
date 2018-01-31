@@ -1,12 +1,12 @@
 <%= form_tag sessions_path, :method => :post do %>
 
   <div class="field">
-    <%= label_tag :email %><br />
+    <%= label_tag :email %>
     <%= text_field_tag :email %>
   </div>
 
   <div class="field">
-    <%= label_tag :password %><br />
+    <%= label_tag :password %>
     <%= password_field_tag :password %>
   </div>
 
@@ -16,12 +16,13 @@
   </div>
 
   <div>
-  <%= check_box_tag :remember, params[:remember], true %>
-  <%= label_tag :remember %>
+  <%= label_tag :remember,'Can I remember you?' %>
+  <%= check_box_tag :remember, params[:remember], true, id: 'remember' %>
+    <%= image_tag 'check.png', class: 'remember' %>
 </div>
 
   <div class="actions">
-    <%= submit_tag "Login" %>
+    <%= submit_tag "Log in" , class:'btn login-btn' %>
   </div>
 
 <% end %>
